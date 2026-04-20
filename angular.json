@@ -47,6 +47,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4199
+          },
           "configurations": {
             "production": {
               "buildTarget": "test-ui:build:production"
