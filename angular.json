@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
+  "version": 2,
   "newProjectRoot": "projects",
   "projects": {
     "test-ui": {
@@ -8,7 +8,8 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      "architect": {
+      "schematics": {},
+      "targets": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -32,7 +33,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "vendorChunk": false,
               "buildOptimizer": true
@@ -42,19 +42,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "test-ui:build",
+            "buildTarget": "test-ui:build",
             "port": 4199
           },
           "configurations": {
             "production": {
-              "browserTarget": "test-ui:build:production"
+              "buildTarget": "test-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "test-ui:build"
+            "buildTarget": "test-ui:build"
           }
         },
         "test": {
