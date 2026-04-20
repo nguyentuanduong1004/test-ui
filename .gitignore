@@ -1,0 +1,12 @@
+# Node modules
+node_modules/
+
+# Output directory
+dist/
+out-tsc/
+
+# Environment files
+.env
+
+# OS files
+.DS_Store
