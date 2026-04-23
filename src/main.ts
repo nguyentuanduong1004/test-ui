@@ -5,12 +5,12 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 import { AppComponent } from './app/app.component';
-import { routes } from './app/app.routes';
+import { appRoutes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideAnimationsAsync(),
-    provideRouter(routes),
+    provideRouter(appRoutes),
     providePrimeNG({
       theme: {
         preset: Aura,
