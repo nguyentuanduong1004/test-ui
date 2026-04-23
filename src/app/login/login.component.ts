@@ -1,59 +1,25 @@
-import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { MessageModule } from 'primeng/message';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    CardModule,
-    InputTextModule,
-    PasswordModule,
-    ButtonModule,
-    FloatLabelModule,
-    IconFieldModule,
-    InputIconModule,
-    MessageModule
+  template: `
+    <section class="login-page">
+      <h1>Login</h1>
+      <p>Angular 19 standalone app is ready.</p>
+    </section>
+  `,
+  styles: [
+    `
+      .login-page {
+        display: grid;
+        gap: 0.75rem;
+        place-items: center;
+        min-height: 100vh;
+        text-align: center;
+      }
+    `,
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
-  private readonly fb = inject(FormBuilder);
-
-  readonly loginForm = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
-  });
-
-  submitted = false;
-
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
-  onSubmit(): void {
-    this.submitted = true;
-
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-
-    console.log('Login attempt', this.loginForm.getRawValue());
-  }
-}
+export class LoginComponent {}
