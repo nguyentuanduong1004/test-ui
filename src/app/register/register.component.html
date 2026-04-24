@@ -1,0 +1,99 @@
+<div class="register-page">
+  <p-card class="register-card">
+    <ng-template pTemplate="header">
+      <div class="card-header">
+        <span class="logo">
+          <i class="pi pi-user-plus"></i>
+        </span>
+        <div>
+          <h1>Create Account</h1>
+          <p>Sign up with PrimeNG components</p>
+        </div>
+      </div>
+    </ng-template>
+
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-field">
+        <p-floatLabel>
+          <input pInputText id="fullName" type="text" formControlName="fullName" autocomplete="name" placeholder=" " />
+          <label for="fullName">Full name</label>
+        </p-floatLabel>
+        <p-message
+          *ngIf="fullName.invalid && (fullName.touched || submitted)"
+          severity="error"
+          text="Full name is required"
+        ></p-message>
+      </div>
+
+      <div class="form-field">
+        <p-floatLabel>
+          <input pInputText id="email" type="email" formControlName="email" autocomplete="email" placeholder=" " />
+          <label for="email">Email</label>
+        </p-floatLabel>
+        <p-message
+          *ngIf="email.invalid && (email.touched || submitted)"
+          severity="error"
+          text="Enter a valid email address"
+        ></p-message>
+      </div>
+
+      <div class="form-field">
+        <p-floatLabel>
+          <p-password
+            id="password"
+            formControlName="password"
+            [feedback]="false"
+            [toggleMask]="true"
+            autocomplete="new-password"
+          ></p-password>
+          <label for="password">Password</label>
+        </p-floatLabel>
+        <p-message
+          *ngIf="password.errors?.['required'] && (password.touched || submitted)"
+          severity="error"
+          text="Password is required"
+        ></p-message>
+        <p-message
+          *ngIf="password.errors?.['minlength'] && (password.touched || submitted)"
+          severity="error"
+          text="Password must be at least 8 characters"
+        ></p-message>
+      </div>
+
+      <div class="form-field">
+        <p-floatLabel>
+          <p-password
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            [feedback]="false"
+            [toggleMask]="true"
+            autocomplete="new-password"
+          ></p-password>
+          <label for="confirmPassword">Confirm password</label>
+        </p-floatLabel>
+        <p-message
+          *ngIf="confirmPassword.errors?.['required'] && (confirmPassword.touched || submitted)"
+          severity="error"
+          text="Please confirm your password"
+        ></p-message>
+        <p-message
+          *ngIf="submitted && !registerForm.invalid && password.value !== confirmPassword.value"
+          severity="error"
+          text="Passwords do not match"
+        ></p-message>
+      </div>
+
+      <div class="terms-row">
+        <p-checkbox inputId="acceptTerms" formControlName="acceptTerms" [binary]="true"></p-checkbox>
+        <label for="acceptTerms">I agree to the Terms and Privacy Policy</label>
+      </div>
+      <p-message
+        *ngIf="acceptTerms.invalid && (acceptTerms.touched || submitted)"
+        severity="error"
+        text="You must accept the terms"
+      ></p-message>
+
+      <button pButton type="submit" label="Sign Up" icon="pi pi-user-plus" class="register-button"></button>
+    </form>
+  </p-card>
+</div>

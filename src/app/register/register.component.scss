@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at top left, rgba(140, 82, 255, 0.25), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(0, 173, 181, 0.25), transparent 60%),
+    var(--surface-ground);
+}
+
+.register-card {
+  width: min(460px, 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
+
+  :host ::ng-deep .p-card-body {
+    padding: 2.5rem;
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 2.5rem 0;
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--primary-color-text);
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+    color: var(--text-color-secondary);
+  }
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-400));
+  color: var(--primary-color-text);
+  font-size: 1.5rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 2.5rem 2.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  :host ::ng-deep .p-message {
+    width: 100%;
+  }
+}
+
+.terms-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-color-secondary);
+}
+
+.register-button {
+  width: 100%;
+  font-weight: 600;
+  padding-block: 0.85rem;
+}
+
+:host ::ng-deep {
+  .p-float-label label {
+    color: var(--text-color-secondary);
+  }
+
+  .p-password {
+    width: 100%;
+  }
+
+  .p-inputtext,
+  .p-password-input {
+    width: 100%;
+  }
+}
