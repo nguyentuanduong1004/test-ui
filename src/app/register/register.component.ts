@@ -4,36 +4,37 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { CheckboxModule } from 'primeng/checkbox';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { PasswordModule } from 'primeng/password';
-import { IconFieldModule } from 'primeng/iconfield';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     CardModule,
+    CheckboxModule,
     FloatLabelModule,
-    IconFieldModule,
-    InputIconModule,
     InputTextModule,
     PasswordModule,
     ButtonModule,
     MessageModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
-  protected readonly loginForm = this.formBuilder.nonNullable.group({
+export class RegisterComponent {
+  protected readonly registerForm = this.formBuilder.nonNullable.group({
+    fullName: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required]],
+    acceptTerms: [false, [Validators.requiredTrue]],
   });
 
   protected submitted = false;
@@ -43,22 +44,34 @@ export class LoginComponent {
     private readonly router: Router,
   ) {}
 
+  protected get fullName() {
+    return this.registerForm.controls.fullName;
+  }
+
   protected get email() {
-    return this.loginForm.controls.email;
+    return this.registerForm.controls.email;
   }
 
   protected get password() {
-    return this.loginForm.controls.password;
+    return this.registerForm.controls.password;
+  }
+
+  protected get confirmPassword() {
+    return this.registerForm.controls.confirmPassword;
+  }
+
+  protected get acceptTerms() {
+    return this.registerForm.controls.acceptTerms;
   }
 
   protected onSubmit(): void {
     this.submitted = true;
-    this.loginForm.markAllAsTouched();
+    this.registerForm.markAllAsTouched();
 
-    if (this.loginForm.invalid) {
+    if (this.registerForm.invalid || this.password.value !== this.confirmPassword.value) {
       return;
     }
 
-    void this.router.navigateByUrl('/register');
+    void this.router.navigateByUrl('/login');
   }
 }
